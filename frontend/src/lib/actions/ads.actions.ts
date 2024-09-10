@@ -22,3 +22,16 @@ export async function addAd(values: FormData) {
     throw new Error("Someting went wrong please try again");
   }
 }
+export async function deleteAd(adId: string) {
+  try {
+    const response = await fetch(`${process.env.API_URL}/ads/${adId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Someting went wrong please try again");
+    }
+    return response.json();
+  } catch (error) {
+    throw new Error("Someting went wrong please try again");
+  }
+}
