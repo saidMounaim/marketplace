@@ -34,7 +34,9 @@ export class AdsController {
     @Body() adsData: AddAdsDto,
     @UploadedFiles(
       new ParseFilePipe({
-        validators: [new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' })],
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpeg|jpg|webp)' }),
+        ],
       }),
     )
     image: Express.Multer.File[],

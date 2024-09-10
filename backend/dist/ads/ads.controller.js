@@ -53,7 +53,9 @@ __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('images')),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.UploadedFiles)(new common_1.ParseFilePipe({
-        validators: [new common_1.FileTypeValidator({ fileType: '.(png|jpeg|jpg)' })],
+        validators: [
+            new common_1.FileTypeValidator({ fileType: '.(png|jpeg|jpg|webp)' }),
+        ],
     }))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [AddAds_dto_1.AddAdsDto, Array]),
