@@ -47,4 +47,5 @@ backend/benchmarks/memory
 backend/build/config\.gypi
 
 backend/.npmrc
+backend/.env
 backend/pnpm-lock.yaml
