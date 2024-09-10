@@ -40,4 +40,7 @@ export declare class AdsService {
         createdAt: Date;
         updatedAt: Date;
     }>;
+    deleteAd(adId: string): Promise<{
+        message: string;
+    }>;
 }

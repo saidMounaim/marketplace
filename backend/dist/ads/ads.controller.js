@@ -30,6 +30,9 @@ let AdsController = class AdsController {
     addAds(adsData, image) {
         return this.adsService.addAd(adsData, image);
     }
+    deleteAd(adId) {
+        return this.adsService.deleteAd(adId);
+    }
 };
 exports.AdsController = AdsController;
 __decorate([
@@ -56,6 +59,13 @@ __decorate([
     __metadata("design:paramtypes", [AddAds_dto_1.AddAdsDto, Array]),
     __metadata("design:returntype", void 0)
 ], AdsController.prototype, "addAds", null);
+__decorate([
+    (0, common_1.Delete)('/:adId'),
+    __param(0, (0, common_1.Param)('adId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AdsController.prototype, "deleteAd", null);
 exports.AdsController = AdsController = __decorate([
     (0, common_1.Controller)('ads'),
     __metadata("design:paramtypes", [ads_service_1.AdsService])

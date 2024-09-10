@@ -38,4 +38,7 @@ export declare class AdsController {
         createdAt: Date;
         updatedAt: Date;
     }>;
+    deleteAd(adId: string): Promise<{
+        message: string;
+    }>;
 }

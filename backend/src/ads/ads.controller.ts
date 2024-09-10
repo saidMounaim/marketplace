@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   FileTypeValidator,
   Get,
   Param,
@@ -39,5 +40,10 @@ export class AdsController {
     image: Express.Multer.File[],
   ) {
     return this.adsService.addAd(adsData, image);
+  }
+
+  @Delete('/:adId')
+  deleteAd(@Param('adId') adId: string) {
+    return this.adsService.deleteAd(adId);
   }
 }

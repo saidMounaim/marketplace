@@ -81,6 +81,14 @@ let AdsService = class AdsService {
         };
         return await this.prisma.ads.create({ data: adWithSlug });
     }
+    async deleteAd(adId) {
+        const ad = await this.prisma.ads.findUnique({ where: { id: adId } });
+        if (!ad) {
+            throw new common_1.BadRequestException('Ad not found');
+        }
+        await this.prisma.ads.delete({ where: { id: adId } });
+        return { message: 'Ad deleted successfully' };
+    }
 };
 exports.AdsService = AdsService;
 exports.AdsService = AdsService = __decorate([
