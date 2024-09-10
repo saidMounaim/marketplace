@@ -7,3 +7,18 @@ export async function getAds() {
   }
   return response.json();
 }
+
+export async function addAd(values: FormData) {
+  try {
+    const response = await fetch(`${process.env.API_URL}/ads`, {
+      method: "POST",
+      body: values,
+    });
+    if (!response.ok) {
+      throw new Error("Someting went wrong please try again");
+    }
+    return response.json();
+  } catch (error) {
+    throw new Error("Someting went wrong please try again");
+  }
+}

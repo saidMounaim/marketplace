@@ -1,11 +1,11 @@
 import * as z from "zod";
 
 enum Category {
-  CLOTHES = "Clothes",
-  ELECTRONICS = "Electronics",
-  FURNITURE = "Furniture",
-  TOYS = "Toys",
-  BOOKS = "Books",
+  CLOTHES = "CLOTHES",
+  ELECTRONICS = "ELECTRONICS",
+  FURNITURE = "FURNITURE",
+  TOYS = "TOYS",
+  BOOKS = "BOOKS",
 }
 
 export const addAdSchema = z.object({

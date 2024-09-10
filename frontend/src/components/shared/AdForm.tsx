@@ -26,18 +26,23 @@ import {
 } from "@/components/ui/select";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { addAdSchema, addAdValues } from "@/lib/validator";
+import { useToast } from "@/hooks/use-toast";
+import { addAd } from "@/lib/actions/ads.actions";
+import { useRouter } from "next/navigation";
 
 enum Category {
-  CLOTHES = "Clothes",
-  ELECTRONICS = "Electronics",
-  FURNITURE = "Furniture",
-  TOYS = "Toys",
-  BOOKS = "Books",
+  CLOTHES = "CLOTHES",
+  ELECTRONICS = "ELECTRONICS",
+  FURNITURE = "FURNITURE",
+  TOYS = "TOYS",
+  BOOKS = "BOOKS",
 }
 
 export default function AdForm() {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<addAdValues>({
     resolver: zodResolver(addAdSchema),
@@ -51,8 +56,36 @@ export default function AdForm() {
     },
   });
 
-  function onSubmit(values: addAdValues) {
-    console.log(values);
+  async function onSubmit(values: addAdValues) {
+    const formData = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        if (key === "images" && Array.isArray(value)) {
+          value.forEach((file, index) => {
+            formData.append(`images`, file);
+          });
+        } else if (value instanceof File) {
+          formData.append(key, value);
+        } else {
+          formData.append(key, value.toString());
+        }
+      }
+    });
+
+    try {
+      await addAd(formData);
+      toast({
+        className: "bg-green-500 text-white text-md font-medium",
+        title: "Ad was added sucessfully.",
+      });
+      router.push("/");
+    } catch (error) {
+      toast({
+        className: "bg-red-500 text-white text-md font-medium",
+        title: "Something went wrong please try again.",
+      });
+    }
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
