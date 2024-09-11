@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AddAdsDto } from './dto/AddAds.dto';
 import slugify from 'slugify';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { Category } from '@prisma/client';
 
 @Injectable()
 export class AdsService {
@@ -11,8 +12,17 @@ export class AdsService {
     private cloudinaryService: CloudinaryService,
   ) {}
 
-  async getAll() {
+  async getAll(query?: string, category?: Category) {
     const ads = await this.prisma.ads.findMany({
+      where: {
+        OR: query
+          ? [
+              { title: { contains: query, mode: 'insensitive' } },
+              { description: { contains: query, mode: 'insensitive' } },
+            ]
+          : undefined,
+        category: category ? category : undefined,
+      },
       orderBy: { createdAt: 'desc' },
       select: {
         id: true,

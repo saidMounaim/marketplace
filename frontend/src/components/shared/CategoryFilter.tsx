@@ -31,7 +31,7 @@ const CategoryFilter = () => {
       <label className="block text-sm font-medium text-gray-700 mb-1">
         Category
       </label>
-      <Select>
+      <Select name="category">
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select a category" />
         </SelectTrigger>

@@ -19,8 +19,17 @@ let AdsService = class AdsService {
         this.prisma = prisma;
         this.cloudinaryService = cloudinaryService;
     }
-    async getAll() {
+    async getAll(query, category) {
         const ads = await this.prisma.ads.findMany({
+            where: {
+                OR: query
+                    ? [
+                        { title: { contains: query, mode: 'insensitive' } },
+                        { description: { contains: query, mode: 'insensitive' } },
+                    ]
+                    : undefined,
+                category: category ? category : undefined,
+            },
             orderBy: { createdAt: 'desc' },
             select: {
                 id: true,

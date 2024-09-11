@@ -7,12 +7,23 @@ import {
 } from "@tanstack/react-query";
 import { getAds } from "@/lib/actions/ads.actions";
 
-export default function Home() {
+interface HomePageParams {
+  searchParams: {
+    category?: string;
+    s?: string;
+  };
+}
+
+export default function Home({ searchParams }: HomePageParams) {
+  const query = searchParams.s || "";
+  const category = searchParams.category || "";
+
   const queryClient = new QueryClient();
   queryClient.prefetchQuery({
     queryKey: ["ads"],
     queryFn: () => getAds(),
   });
+
   return (
     <>
       <main className="flex-grow container mx-auto p-4 md:p-6">
@@ -25,7 +36,7 @@ export default function Home() {
               <h1 className="text-2xl font-bold text-gray-800">Featured Ads</h1>
             </div>
             <HydrationBoundary state={dehydrate(queryClient)}>
-              <FetchAds />
+              <FetchAds query={query} category={category} />
             </HydrationBoundary>
           </div>
         </div>

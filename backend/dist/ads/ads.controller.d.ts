@@ -1,9 +1,10 @@
 import { AdsService } from './ads.service';
 import { AddAdsDto } from './dto/AddAds.dto';
+import { Category } from '@prisma/client';
 export declare class AdsController {
     private adsService;
     constructor(adsService: AdsService);
-    getAll(): Promise<{
+    getAll(query: string, category: Category): Promise<{
         id: string;
         title: string;
         slug: string;

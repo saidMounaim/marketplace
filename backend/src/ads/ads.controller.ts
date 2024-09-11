@@ -7,20 +7,22 @@ import {
   Param,
   ParseFilePipe,
   Post,
+  Query,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { AdsService } from './ads.service';
 import { AddAdsDto } from './dto/AddAds.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { Category } from '@prisma/client';
 
 @Controller('ads')
 export class AdsController {
   constructor(private adsService: AdsService) {}
 
   @Get()
-  getAll() {
-    return this.adsService.getAll();
+  getAll(@Query('query') query: string, @Query('category') category: Category) {
+    return this.adsService.getAll(query, category);
   }
 
   @Get(':slug')

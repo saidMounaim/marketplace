@@ -1,7 +1,12 @@
 "use server";
 
-export async function getAds() {
-  const response = await fetch(`${process.env.API_URL}/ads`);
+export async function getAds(query?: string, category?: string) {
+  const queryString = new URLSearchParams({
+    ...(query && { query }),
+    ...(category && { category }),
+  }).toString();
+
+  const response = await fetch(`${process.env.API_URL}/ads?${queryString}`);
   if (!response.ok) {
     throw new Error("Something went wrong please try again");
   }

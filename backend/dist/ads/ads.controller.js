@@ -17,12 +17,13 @@ const common_1 = require("@nestjs/common");
 const ads_service_1 = require("./ads.service");
 const AddAds_dto_1 = require("./dto/AddAds.dto");
 const platform_express_1 = require("@nestjs/platform-express");
+const client_1 = require("@prisma/client");
 let AdsController = class AdsController {
     constructor(adsService) {
         this.adsService = adsService;
     }
-    getAll() {
-        return this.adsService.getAll();
+    getAll(query, category) {
+        return this.adsService.getAll(query, category);
     }
     getSingle(slug) {
         return this.adsService.getSingle(slug);
@@ -37,8 +38,10 @@ let AdsController = class AdsController {
 exports.AdsController = AdsController;
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('query')),
+    __param(1, (0, common_1.Query)('category')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], AdsController.prototype, "getAll", null);
 __decorate([

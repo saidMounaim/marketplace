@@ -6,14 +6,19 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingAds from "./LoadingAds";
 import ErrorAds from "./ErrorAds";
 
-const FetchAds = () => {
+interface FetchAdsProps {
+  query: string;
+  category: string;
+}
+
+const FetchAds = ({ query, category }: FetchAdsProps) => {
   const {
     data: ads,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["ads"],
-    queryFn: () => getAds(),
+    queryKey: ["ads", query, category],
+    queryFn: () => getAds(query, category),
   });
 
   if (isLoading) return <LoadingAds />;
