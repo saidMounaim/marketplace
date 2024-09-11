@@ -18,6 +18,7 @@ const ads_service_1 = require("./ads.service");
 const AddAds_dto_1 = require("./dto/AddAds.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const client_1 = require("@prisma/client");
+const jwt_auth_guard_1 = require("./jwt-auth.guard");
 let AdsController = class AdsController {
     constructor(adsService) {
         this.adsService = adsService;
@@ -28,8 +29,9 @@ let AdsController = class AdsController {
     getSingle(slug) {
         return this.adsService.getSingle(slug);
     }
-    addAds(adsData, image) {
-        return this.adsService.addAd(adsData, image);
+    addAds(adsData, image, req) {
+        const userId = req.user.id;
+        return this.adsService.addAd(adsData, image, userId);
     }
     deleteAd(adId) {
         return this.adsService.deleteAd(adId);
@@ -54,14 +56,16 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('images')),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.UploadedFiles)(new common_1.ParseFilePipe({
         validators: [
             new common_1.FileTypeValidator({ fileType: '.(png|jpeg|jpg|webp)' }),
         ],
     }))),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [AddAds_dto_1.AddAdsDto, Array]),
+    __metadata("design:paramtypes", [AddAds_dto_1.AddAdsDto, Array, Object]),
     __metadata("design:returntype", void 0)
 ], AdsController.prototype, "addAds", null);
 __decorate([

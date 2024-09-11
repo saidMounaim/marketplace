@@ -14,6 +14,7 @@ const prisma_module_1 = require("./prisma/prisma.module");
 const ads_module_1 = require("./ads/ads.module");
 const cloudinary_module_1 = require("./cloudinary/cloudinary.module");
 const config_1 = require("@nestjs/config");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,6 +27,7 @@ exports.AppModule = AppModule = __decorate([
             prisma_module_1.PrismaModule,
             cloudinary_module_1.CloudinaryModule,
             ads_module_1.AdsModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

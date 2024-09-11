@@ -32,7 +32,7 @@ export declare class AdsService {
             url: string;
         }[];
     }>;
-    addAd(adsData: AddAdsDto, images: Express.Multer.File[]): Promise<{
+    addAd(adsData: AddAdsDto, images: Express.Multer.File[], userId: string): Promise<{
         id: string;
         title: string;
         slug: string;
@@ -42,6 +42,7 @@ export declare class AdsService {
         category: import(".prisma/client").$Enums.Category;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
     }>;
     deleteAd(adId: string): Promise<{
         message: string;

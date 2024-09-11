@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AdsModule } from './ads/ads.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     PrismaModule,
     CloudinaryModule,
     AdsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

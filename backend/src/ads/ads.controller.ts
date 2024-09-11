@@ -8,13 +8,16 @@ import {
   ParseFilePipe,
   Post,
   Query,
+  Req,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { AdsService } from './ads.service';
 import { AddAdsDto } from './dto/AddAds.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { Category } from '@prisma/client';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('ads')
 export class AdsController {
@@ -32,6 +35,7 @@ export class AdsController {
 
   @Post()
   @UseInterceptors(FilesInterceptor('images'))
+  @UseGuards(JwtAuthGuard)
   addAds(
     @Body() adsData: AddAdsDto,
     @UploadedFiles(
@@ -42,8 +46,11 @@ export class AdsController {
       }),
     )
     image: Express.Multer.File[],
+    @Req()
+    req: any,
   ) {
-    return this.adsService.addAd(adsData, image);
+    const userId = req.user.id;
+    return this.adsService.addAd(adsData, image, userId);
   }
 
   @Delete('/:adId')

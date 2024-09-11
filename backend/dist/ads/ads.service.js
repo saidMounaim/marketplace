@@ -73,7 +73,7 @@ let AdsService = class AdsService {
         }
         return ad;
     }
-    async addAd(adsData, images) {
+    async addAd(adsData, images, userId) {
         let slug = (0, slugify_1.default)(adsData.title, {
             lower: true,
             strict: true,
@@ -101,6 +101,7 @@ let AdsService = class AdsService {
             ...adsData,
             slug,
             price: Number(adsData.price),
+            userId,
             images: {
                 create: imageUrls.map((url) => ({ url })),
             },

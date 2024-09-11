@@ -70,7 +70,11 @@ export class AdsService {
     return ad;
   }
 
-  async addAd(adsData: AddAdsDto, images: Express.Multer.File[]) {
+  async addAd(
+    adsData: AddAdsDto,
+    images: Express.Multer.File[],
+    userId: string,
+  ) {
     let slug = slugify(adsData.title, {
       lower: true,
       strict: true,
@@ -104,6 +108,7 @@ export class AdsService {
       ...adsData,
       slug,
       price: Number(adsData.price),
+      userId,
       images: {
         create: imageUrls.map((url) => ({ url })),
       },
