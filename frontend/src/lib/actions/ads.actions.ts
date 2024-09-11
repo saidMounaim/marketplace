@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/auth";
 import { ERROR_MESSAGES } from "../errorMessages";
 
 export async function getAds(query?: string, category?: string) {
@@ -24,10 +25,14 @@ export async function getSingleAd(slug: string) {
 }
 
 export async function addAd(values: FormData) {
+  const session = await auth();
   try {
     const response = await fetch(`${process.env.API_URL}/ads`, {
       method: "POST",
       body: values,
+      headers: {
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+      },
     });
     if (!response.ok) {
       throw new Error(ERROR_MESSAGES.ADD_AD);

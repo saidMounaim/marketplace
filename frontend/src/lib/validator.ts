@@ -37,3 +37,24 @@ export const addAdSchema = z.object({
 });
 
 export type addAdValues = z.infer<typeof addAdSchema>;
+
+export const SignInSchema = z.object({
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .min(8, "Password must be at least 8 characters"),
+});
+
+export type SignInValues = z.infer<typeof SignInSchema>;
+
+export const SignUpSchema = z.object({
+  name: z.string().min(1, "Full name is required"),
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .min(8, "Password must be at least 8 characters"),
+});
+
+export type SignUpValues = z.infer<typeof SignUpSchema>;
