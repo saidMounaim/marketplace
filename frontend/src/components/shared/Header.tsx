@@ -6,12 +6,12 @@ const Header = () => {
   return (
     <header className="bg-white text-black p-4">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <Link href="/" className="flex items-center space-x-4">
           <Leaf className="h-8 w-8" />
           <span className="text-2xl font-bold">Marketplace</span>
-        </div>
+        </Link>
         <nav className="hidden md:flex space-x-4">
-          <Link href="#" className="hover:underline">
+          <Link href="/" className="hover:underline">
             Home
           </Link>
           <Link href="#" className="hover:underline">

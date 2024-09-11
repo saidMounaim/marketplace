@@ -44,7 +44,24 @@ export class AdsService {
   }
 
   async getSingle(slug: string) {
-    const ad = await this.prisma.ads.findUnique({ where: { slug } });
+    const ad = await this.prisma.ads.findUnique({
+      where: { slug },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        price: true,
+        category: true,
+        contact: true,
+        createdAt: true,
+        images: {
+          select: {
+            id: true,
+            url: true,
+          },
+        },
+      },
+    });
 
     if (!ad) {
       throw new BadRequestException('Ad not found');

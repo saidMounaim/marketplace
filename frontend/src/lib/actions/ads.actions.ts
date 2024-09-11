@@ -13,6 +13,14 @@ export async function getAds(query?: string, category?: string) {
   return response.json();
 }
 
+export async function getSingleAd(slug: string) {
+  const response = await fetch(`${process.env.API_URL}/ads/${slug.toString()}`);
+  if (!response.ok) {
+    throw new Error("Something went wrong please try again");
+  }
+  return response.json();
+}
+
 export async function addAd(values: FormData) {
   try {
     const response = await fetch(`${process.env.API_URL}/ads`, {

@@ -22,13 +22,15 @@ export declare class AdsService {
     getSingle(slug: string): Promise<{
         id: string;
         title: string;
-        slug: string;
         description: string;
         price: number;
         contact: string;
         category: import(".prisma/client").$Enums.Category;
         createdAt: Date;
-        updatedAt: Date;
+        images: {
+            id: string;
+            url: string;
+        }[];
     }>;
     addAd(adsData: AddAdsDto, images: Express.Multer.File[]): Promise<{
         id: string;
