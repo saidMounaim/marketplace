@@ -33,7 +33,7 @@ const Header = async () => {
                 asChild
                 className="text-white bg-green-600 hover:bg-green-600"
               >
-                <Link href="/ad/create">Post Ad</Link>
+                <Link href="/ad/create">Post an Ad</Link>
               </Button>
               <UserDropdown
                 name={session?.user?.name as string}
