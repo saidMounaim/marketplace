@@ -43,15 +43,20 @@ export async function addAd(values: FormData) {
   }
 }
 export async function deleteAd(adId: string) {
+  const session = await auth();
   try {
     const response = await fetch(`${process.env.API_URL}/ads/${adId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+      },
     });
     if (!response.ok) {
       throw new Error(ERROR_MESSAGES.DELETE_AD);
     }
     return response.json();
   } catch (error) {
+    console.log(error);
     throw new Error(ERROR_MESSAGES.DELETE_AD);
   }
 }

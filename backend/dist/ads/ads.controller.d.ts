@@ -12,6 +12,7 @@ export declare class AdsController {
         price: number;
         contact: string;
         category: import(".prisma/client").$Enums.Category;
+        userId: string;
         images: {
             id: string;
             url: string;
@@ -29,6 +30,9 @@ export declare class AdsController {
             id: string;
             url: string;
         }[];
+        user: {
+            email: string;
+        };
     }>;
     addAds(adsData: AddAdsDto, image: Express.Multer.File[], req: any): Promise<{
         id: string;

@@ -4,4 +4,5 @@ export const ERROR_MESSAGES = {
   ADD_AD: "Unable to add ad. Please try again later.",
   DELETE_AD: "Unable to delete ad. Please try again later.",
   REGISTER_USER: "Unable to register. Please try again later.",
+  GET_LOGGED_IN: "Unable to get logged in user. Please try again later.",
 };

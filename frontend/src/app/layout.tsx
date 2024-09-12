@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/shared/Header";
 import Providers from "@/providers";
 import { Toaster } from "@/components/ui/toaster";
+import SessionProvierAuth from "@/sessionProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,11 +33,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <Header />
-          {children}
-          <Toaster />
-        </Providers>
+        <SessionProvierAuth>
+          <Providers>
+            <Header />
+            {children}
+            <Toaster />
+          </Providers>
+        </SessionProvierAuth>
       </body>
     </html>
   );

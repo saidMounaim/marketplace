@@ -21,4 +21,20 @@ export declare class AuthService {
         createdAt: Date;
         updatedAt: Date;
     }>;
+    getLoggedInUser(userId: string): Promise<{
+        id: string;
+        name: string;
+        email: string;
+        ads: {
+            id: string;
+            userId: string;
+            title: string;
+            description: string;
+            price: number;
+            images: {
+                id: string;
+                url: string;
+            }[];
+        }[];
+    }>;
 }

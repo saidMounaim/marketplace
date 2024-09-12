@@ -70,6 +70,7 @@ __decorate([
 ], AdsController.prototype, "addAds", null);
 __decorate([
     (0, common_1.Delete)('/:adId'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, common_1.Param)('adId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

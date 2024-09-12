@@ -8,7 +8,7 @@ const ErrorAds = () => {
       <AlertCircle className="h-4 w-4" />
       <AlertTitle>Error</AlertTitle>
       <AlertDescription>
-        Something went wrong. Please log in again.
+        Something went wrong. Please try again.
       </AlertDescription>
     </Alert>
   );

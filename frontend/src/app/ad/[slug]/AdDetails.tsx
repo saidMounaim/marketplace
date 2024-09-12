@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getSingleAd } from "@/lib/actions/ads.actions";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { formatDistanceToNow } from "date-fns";
 
 const AdDetails = ({ slug }: { slug: string }) => {
   const {
@@ -78,10 +79,22 @@ const AdDetails = ({ slug }: { slug: string }) => {
                 </p>
               </div>
             </div>
+            <div>
+              <h2 className="text-xl font-semibold">Created</h2>
+              <div className="text-muted-foreground text-sm">
+                <p>
+                  {formatDistanceToNow(new Date(ad.createdAt), {
+                    addSuffix: true,
+                  })}
+                </p>
+              </div>
+            </div>
           </CardContent>
           <CardFooter>
-            <Button size="lg" className="w-full">
-              Contact Seller
+            <Button asChild size="lg" className="w-full">
+              <a href={`mailto:${ad.user.email}`} target="_blank">
+                Contact Seller
+              </a>
             </Button>
           </CardFooter>
         </Card>

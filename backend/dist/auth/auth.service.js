@@ -51,6 +51,37 @@ let AuthService = class AuthService {
         });
         return newUser;
     }
+    async getLoggedInUser(userId) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                ads: {
+                    select: {
+                        id: true,
+                        title: true,
+                        description: true,
+                        price: true,
+                        userId: true,
+                        images: {
+                            select: {
+                                id: true,
+                                url: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+        if (!user) {
+            throw new common_1.BadRequestException('User not found');
+        }
+        return user;
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

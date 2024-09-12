@@ -32,6 +32,7 @@ export class AdsService {
         price: true,
         contact: true,
         category: true,
+        userId: true,
         images: {
           select: {
             id: true,
@@ -53,6 +54,11 @@ export class AdsService {
         price: true,
         category: true,
         contact: true,
+        user: {
+          select: {
+            email: true,
+          },
+        },
         createdAt: true,
         images: {
           select: {

@@ -54,6 +54,7 @@ export class AdsController {
   }
 
   @Delete('/:adId')
+  @UseGuards(JwtAuthGuard)
   deleteAd(@Param('adId') adId: string) {
     return this.adsService.deleteAd(adId);
   }

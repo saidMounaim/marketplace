@@ -14,14 +14,6 @@ const Header = async () => {
           <Leaf className="h-8 w-8" />
           <span className="text-2xl font-bold">Marketplace</span>
         </Link>
-        <nav className="hidden md:flex space-x-4">
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
-          <Link href="#" className="hover:underline">
-            About
-          </Link>
-        </nav>
         <div className="flex space-x-2">
           {!session ? (
             <>

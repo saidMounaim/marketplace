@@ -20,4 +20,20 @@ export declare class AuthController {
         createdAt: Date;
         updatedAt: Date;
     }>;
+    getLoggedIn(req: any): Promise<{
+        id: string;
+        name: string;
+        email: string;
+        ads: {
+            id: string;
+            userId: string;
+            title: string;
+            description: string;
+            price: number;
+            images: {
+                id: string;
+                url: string;
+            }[];
+        }[];
+    }>;
 }

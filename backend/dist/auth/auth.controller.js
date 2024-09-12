@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const LoginUser_dto_1 = require("./dto/LoginUser.dto");
 const auth_service_1 = require("./auth.service");
 const RegisterUser_dto_1 = require("./dto/RegisterUser.dto");
+const jwt_auth_guard_1 = require("../ads/jwt-auth.guard");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -26,6 +27,10 @@ let AuthController = class AuthController {
     }
     register(userInfo) {
         return this.authService.register(userInfo);
+    }
+    getLoggedIn(req) {
+        const userId = req.user.id;
+        return this.authService.getLoggedInUser(userId);
     }
 };
 exports.AuthController = AuthController;
@@ -43,6 +48,14 @@ __decorate([
     __metadata("design:paramtypes", [RegisterUser_dto_1.RegisterUserDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "register", null);
+__decorate([
+    (0, common_1.Post)('me'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "getLoggedIn", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
